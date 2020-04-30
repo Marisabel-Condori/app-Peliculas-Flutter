@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:pelicula_original/models/pelicula_model.dart';
@@ -10,6 +11,17 @@ class PeliculasProvider{
   String _languaje = 'es-ES';
 
   int _popularesPage = 0;
+
+  List<Pelicula> _populares = new List();
+  final _popularesStream = StreamController<List<Pelicula>>.broadcast();
+
+  Function(List<Pelicula>) get popularesSink  => _popularesStream.sink.add; 
+
+  Stream get popularesStream => _popularesStream.stream;
+
+  void dispose(){
+    _popularesStream?.close();
+  }
 
   Future<List<Pelicula>> _procesarRespuesta(Uri url) async{
     final resp = await  http.get(url);
