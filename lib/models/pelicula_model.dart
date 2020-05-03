@@ -77,4 +77,11 @@ class Pelicula {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
     }
   }
+  getBackgroundImg(){
+    if(posterPath == null){
+      return 'https://st4.depositphotos.com/14953852/24651/v/450/depositphotos_246517344-stock-illustration-image-available-icon-vector-flat.jpg';
+    }else{
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+    }
+  }
 }
