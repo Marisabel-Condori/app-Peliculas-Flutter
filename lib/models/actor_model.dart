@@ -1,12 +1,12 @@
-class Cast{
-  List<Actor> actores = List();
+class Actores{
+  List<Actor> listActores = List();
 
-  Cast.fromJsonList(List<dynamic> json){
+  Actores.fromJsonList(List<dynamic> json){
     if(json == null){return;}
 
     for (var item in json) {
       final actor = Actor.fromJson(item);
-      actores.add(actor);
+      listActores.add(actor);
     }
   }
 }
