@@ -54,7 +54,14 @@ class DetallePelicula extends StatelessWidget {
               image: NetworkImage(pelicula.getPosterImg()),
               height: 150.0,
             )
-          )
+          ),
+          SizedBox(width: 15.0,),
+          Flexible(child: Column(
+            children: <Widget>[
+              Text(pelicula.title),
+              Text(pelicula.originalTitle)
+            ],
+          ))
         ],
       ),
     );
