@@ -52,15 +52,19 @@ class DetallePelicula extends StatelessWidget {
       padding: EdgeInsets.all(15.0),
       child: Row(
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-            child: Image(
-              image: NetworkImage(pelicula.getPosterImg()),
-              height: 150.0,
-            )
+          Hero(
+            tag: pelicula.id,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.0),
+              child: Image(
+                image: NetworkImage(pelicula.getPosterImg()),
+                height: 150.0,
+              )
+            ),
           ),
           SizedBox(width: 15.0,),
           Flexible(child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis,),
               Text(pelicula.originalTitle, style: Theme.of(context).textTheme.subhead, overflow: TextOverflow.ellipsis),
@@ -117,7 +121,9 @@ class DetallePelicula extends StatelessWidget {
                   child: FadeInImage(
                     height: 140.0,
                     placeholder: AssetImage('assets/img/no-image.jpg'), 
-                    image: NetworkImage(actores[i].getFotoImg())),
+                    image: NetworkImage(actores[i].getFotoImg()),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Text(actores[i].name, overflow: TextOverflow.ellipsis,),
               ],
