@@ -12,7 +12,8 @@ class DetallePelicula extends StatelessWidget {
           _crearAppBar(pelicula), 
           SliverList(delegate: SliverChildListDelegate(
             [
-              _posterTitulo(pelicula),
+              _posterTitulo(context, pelicula),
+              _descripcion(pelicula),
             ]
           ))
           ],
@@ -43,7 +44,7 @@ class DetallePelicula extends StatelessWidget {
     );
   }
 
-  Widget _posterTitulo(Pelicula pelicula) {
+  Widget _posterTitulo(BuildContext context ,Pelicula pelicula) {
     return Container(
       padding: EdgeInsets.all(15.0),
       child: Row(
@@ -58,11 +59,26 @@ class DetallePelicula extends StatelessWidget {
           SizedBox(width: 15.0,),
           Flexible(child: Column(
             children: <Widget>[
-              Text(pelicula.title),
-              Text(pelicula.originalTitle)
+              Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis,),
+              Text(pelicula.originalTitle, style: Theme.of(context).textTheme.subhead, overflow: TextOverflow.ellipsis),
+              Row(children: <Widget>[
+                Icon(Icons.star_border),
+                SizedBox(width: 10.0,),
+                Text(pelicula.voteAverage.toString())
+              ],)
             ],
           ))
         ],
+      ),
+    );
+  }
+
+  _descripcion(Pelicula pelicula) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: Text(
+        pelicula.overview,
+        textAlign: TextAlign.justify,
       ),
     );
   }
