@@ -33,14 +33,14 @@ class Actor {
   });
 
   Actor.fromJson(Map<String, dynamic> json){
-    castId     = json['cast_Id'];
+    castId     = json['cast_id'];
     character = json['character'];
-    creditId = json['credit_Id'];
+    creditId = json['credit_id'];
     gender = json['gender'];
     id = json['id'];
     name = json['name'];
     order = json['order'];
-    profilePath = json['profile_Path'];
+    profilePath = json['profile_path'];
   }
 
   getFotoImg(){

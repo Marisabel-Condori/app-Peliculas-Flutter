@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pelicula_original/models/actor_model.dart';
 import 'package:pelicula_original/models/pelicula_model.dart';
+import 'package:pelicula_original/provider/peliculas_provider.dart';
 
 class DetallePelicula extends StatelessWidget {
   @override
@@ -14,6 +16,7 @@ class DetallePelicula extends StatelessWidget {
             [
               _posterTitulo(context, pelicula),
               _descripcion(pelicula),
+              _actores(pelicula)
             ]
           ))
           ],
@@ -79,6 +82,49 @@ class DetallePelicula extends StatelessWidget {
       child: Text(
         pelicula.overview,
         textAlign: TextAlign.justify,
+      ),
+    );
+  }
+
+  _actores(Pelicula pelicula){
+    final peliProvider = PeliculasProvider();
+    return FutureBuilder(
+      future: peliProvider.getActores(pelicula.id.toString()),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if(snapshot.hasData){ return _crearActores(snapshot.data);}
+        else{return CircularProgressIndicator();}
+      },
+    );
+  }
+
+  _crearActores(List<Actor> actores) {
+    return SizedBox(
+      height: 200.0,
+      child: PageView.builder(
+        pageSnapping: false,
+        itemCount: actores.length,
+        controller: PageController(
+          initialPage: 1,
+          viewportFraction: 0.28
+        ),
+        itemBuilder: (context, i){
+          return Container(
+            padding: EdgeInsets.only(top: 15.0),
+            child: Column(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: FadeInImage(
+                    height: 140.0,
+                    placeholder: AssetImage('assets/img/no-image.jpg'), 
+                    image: NetworkImage(actores[i].getFotoImg())),
+                ),
+                Text(actores[i].name, overflow: TextOverflow.ellipsis,),
+              ],
+            ),
+          );
+          //Text(actores[i].name);
+        }
       ),
     );
   }
