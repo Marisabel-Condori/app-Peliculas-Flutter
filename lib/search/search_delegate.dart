@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
      'iron man1',
      'iron man2',
      'iron man3',
-     'capitan America'
-     'thor'
-     'vengadores'
+     'capitan America',
+     'thor',
+     'vengadores',
    ];
    final peliReciente = [
      'spiderman',
@@ -50,12 +50,16 @@ import 'package:flutter/material.dart';
   @override
   Widget buildSuggestions(BuildContext context) {
     // sugerencias que aparece cuando la persona escribe
+
+    final listaSugerida = (query.isEmpty)? peliReciente: 
+          peliculas.where((p) => p.toLowerCase().startsWith(query.toLowerCase())).toList();
+
     return ListView.builder(
-      itemCount: peliReciente.length,
+      itemCount: listaSugerida.length,
       itemBuilder: (context, i){
         return ListTile(
           leading: Icon(Icons.movie),
-          title: Text(peliReciente[i]),
+          title: Text(listaSugerida[i]),
         );
       }
     );
