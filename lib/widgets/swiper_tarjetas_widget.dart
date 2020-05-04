@@ -17,12 +17,20 @@ class SwiperTarjetas extends StatelessWidget {
         itemHeight: _screenSize.height * 0.59,
         layout: SwiperLayout.STACK,
             itemBuilder: (BuildContext context, int index) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: FadeInImage(
-                  placeholder: AssetImage('assets/img/no-image.jpg'), 
-                  image: NetworkImage(peliculas[index].getPosterImg()),
-                  fit: BoxFit.cover,
+              return Hero(
+                tag: peliculas[index].id,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: GestureDetector(
+                    child:FadeInImage(
+                    placeholder: AssetImage('assets/img/no-image.jpg'), 
+                    image: NetworkImage(peliculas[index].getPosterImg()),
+                    fit: BoxFit.cover,
+                    ),
+                    onTap: (){
+                      Navigator.pushNamed(context, 'detalle', arguments: peliculas[index]);
+                    },
+                  ) 
                 ),
               );
             },
@@ -31,5 +39,6 @@ class SwiperTarjetas extends StatelessWidget {
           //  control: new SwiperControl(),
           ),
     );
+    
   }
 }
