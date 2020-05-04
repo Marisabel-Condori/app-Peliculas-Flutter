@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
       IconButton(
         icon: Icon(Icons.clear), 
         onPressed: (){
-          print('CLICK');
+          query = '';
         })
     ];
   }
@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
         progress: transitionAnimation
       ),
         onPressed: (){
-          print('presionando el leadig');
+          close(context, null);
         },
     );
   }
