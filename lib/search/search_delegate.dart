@@ -4,13 +4,27 @@ import 'package:flutter/material.dart';
   @override
   List<Widget> buildActions(BuildContext context) {
     // Acciones del AppBar
-    return null;
+    return [
+      IconButton(
+        icon: Icon(Icons.clear), 
+        onPressed: (){
+          print('CLICK');
+        })
+    ];
   }
 
   @override
   Widget buildLeading(BuildContext context) {
     // icono de la izquierda del Appbar
-    return null;
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow, 
+        progress: transitionAnimation
+      ),
+        onPressed: (){
+          print('presionando el leadig');
+        },
+    );
   }
 
   @override
