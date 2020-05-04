@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
  
  class DataSearch extends SearchDelegate{
+   String sugerencia ='';
    final peliculas = [
      'iron man',
      'iron man1',
@@ -44,7 +45,14 @@ import 'package:flutter/material.dart';
   @override
   Widget buildResults(BuildContext context) {
     // crea resultados que vamos a mostrar
-    return Container();
+    return Center(
+      child: Container(
+        width: 300.0,
+        height: 200.0,
+        color: Colors.deepOrange,
+        child: Text(sugerencia),
+      )
+    );
   }
 
   @override
@@ -60,6 +68,10 @@ import 'package:flutter/material.dart';
         return ListTile(
           leading: Icon(Icons.movie),
           title: Text(listaSugerida[i]),
+          onTap: (){
+            sugerencia = listaSugerida[i];
+            showResults(context);
+          },
         );
       }
     );
