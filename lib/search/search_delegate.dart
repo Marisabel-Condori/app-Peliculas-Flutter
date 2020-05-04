@@ -30,13 +30,13 @@ import 'package:flutter/material.dart';
   @override
   Widget buildResults(BuildContext context) {
     // crea resultados que vamos a mostrar
-    return null;
+    return Container();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     // sugerencias que aparece cuando la persona escribe
-    return null;
+    return Container();
   }
 
  }
