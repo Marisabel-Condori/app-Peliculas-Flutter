@@ -79,6 +79,12 @@ import 'package:pelicula_original/provider/peliculas_provider.dart';
                   width: 50.0,
                 ),
                 title: Text(pelicula.title),
+                subtitle: Text(pelicula.originalTitle),
+                onTap: (){
+                  pelicula.uniqueId = '';
+                  close(context, null);
+                  Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+                },
               );
             }).toList(),
           );
