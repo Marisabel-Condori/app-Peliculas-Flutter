@@ -99,7 +99,7 @@ class DetallePelicula extends StatelessWidget {
       future: peliProvider.getActores(pelicula.id.toString()),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if(snapshot.hasData){ return _crearActores(snapshot.data);}
-        else{return CircularProgressIndicator();}
+        else{return Center(child: CircularProgressIndicator());}
       },
     );
   }

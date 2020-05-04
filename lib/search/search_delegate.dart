@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pelicula_original/models/pelicula_model.dart';
+import 'package:pelicula_original/provider/peliculas_provider.dart';
  
  class DataSearch extends SearchDelegate{
+   final peliProvider = PeliculasProvider();
    String sugerencia ='';
    final peliculas = [
      'iron man',
@@ -59,21 +62,30 @@ import 'package:flutter/material.dart';
   Widget buildSuggestions(BuildContext context) {
     // sugerencias que aparece cuando la persona escribe
 
-    final listaSugerida = (query.isEmpty)? peliReciente: 
-          peliculas.where((p) => p.toLowerCase().startsWith(query.toLowerCase())).toList();
-
-    return ListView.builder(
-      itemCount: listaSugerida.length,
-      itemBuilder: (context, i){
-        return ListTile(
-          leading: Icon(Icons.movie),
-          title: Text(listaSugerida[i]),
-          onTap: (){
-            sugerencia = listaSugerida[i];
-            showResults(context);
-          },
-        );
-      }
+    if(query.isEmpty){return Container();}
+    
+    return FutureBuilder(
+      future: peliProvider.buscaPelicula(query),
+      builder: (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
+        if(snapshot.hasData){
+          final peli = snapshot.data;
+          return ListView(
+            children: peli.map((pelicula){
+              return ListTile(
+                leading: FadeInImage(
+                  placeholder: AssetImage('assets/img/no-img'), 
+                  image: NetworkImage(pelicula.getPosterImg()),
+                  fit: BoxFit.contain,
+                  width: 50.0,
+                ),
+                title: Text(pelicula.title),
+              );
+            }).toList(),
+          );
+        }else{
+          return Center(child: CircularProgressIndicator(),);
+        }
+      },
     );
   }
 
