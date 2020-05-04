@@ -17,8 +17,9 @@ class SwiperTarjetas extends StatelessWidget {
         itemHeight: _screenSize.height * 0.59,
         layout: SwiperLayout.STACK,
             itemBuilder: (BuildContext context, int index) {
+              peliculas[index].uniqueId = '${peliculas[index].id}-card';
               return Hero(
-                tag: peliculas[index].id,
+                tag: peliculas[index].uniqueId,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: GestureDetector(

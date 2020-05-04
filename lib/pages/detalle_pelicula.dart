@@ -16,6 +16,9 @@ class DetallePelicula extends StatelessWidget {
             [
               _posterTitulo(context, pelicula),
               _descripcion(pelicula),
+              _descripcion(pelicula),
+              _descripcion(pelicula),
+              _descripcion(pelicula),
               _actores(pelicula)
             ]
           ))
@@ -53,7 +56,7 @@ class DetallePelicula extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Hero(
-            tag: pelicula.id,
+            tag: pelicula.uniqueId,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: Image(
